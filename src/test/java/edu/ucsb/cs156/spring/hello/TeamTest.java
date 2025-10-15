@@ -45,9 +45,32 @@ public class TeamTest {
     }
     @Test
     public void equals_returns_correct_same_team() {
-        Team team2 = new Team("test-team");
-        assertEquals(true, team.equals(team2));
-        assertEquals(false, !team.equals(team2));
+        Team team0 = new Team("test-team");
+        assertEquals(true, team.equals(team0));
+        assertEquals(false, !team.equals(team0));
+
+
+        Team team1 = new Team("team1");
+        Team team2 = new Team("team1"); // same as team 1
+        Team team3 = new Team("team1"); // same name but different members
+        Team team4 = new Team("team2"); // different name and same members
+        Team team5 = new Team("team2"); // different name and different members
+        assertEquals(true, team1.equals(team2));
+        assertEquals(false, !team1.equals(team2));
+        team1.addMember("Austin");
+        team2.addMember("Austin");
+        assertEquals(true, team1.equals(team2));
+        assertEquals(false, !team1.equals(team2)); // team 1 and team 2 are equal now
+        assertEquals(false, team1.equals(team3));
+        assertEquals(true, !team1.equals(team3));
+        team4.addMember("Austin");
+        assertEquals(false, team1.equals(team4));
+        assertEquals(true, !team1.equals(team4));
+        assertEquals(false, team1.equals(team5));
+        assertEquals(true, !team1.equals(team5));
+        assertEquals(team.toString(), team.toString());
+
+
     }
     // TODO: Add additional tests as needed to get to 100% jacoco line coverage, and
     // 100% mutation coverage (all mutants timed out or killed)
